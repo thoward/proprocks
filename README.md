@@ -28,32 +28,11 @@ a.fizz # 'buzz'
 # Initialize with hash syntax
 a = Foo.new :bar => 'blah'
 
-a.bar # 'blah'
-a.fizz # 'buzz'
-
-# Hash syntax overrides default!
-a = Foo.new :bar => 'blah', :fizz => 'whizz'
-
-a.bar # 'blah'
-a.fizz # 'whizz'
-
-# Initialize with DSL-style block syntax. This overrides defaults too!
+# Initialize with DSL-style block syntax.
 a = Foo.new do
   bar 'blorg'
   fizz 'whorg'
 end
-
-a.bar # 'blorg'
-a.fizz # 'whorg'
-
-# Initialize with Hash and DSL-style together. DSL overrides Hash!
-a = Foo.new(:bar => 'blaggle', :fizz => 'waggle') do
-  fizz 'whorggle'
-end
-
-a.bar # 'blaggle'
-a.fizz # 'whorggle'
-  
 ```
 
 ## Installation
