@@ -83,3 +83,86 @@ Once installed you just need to require it:
 ```ruby
 require 'proprocks'
 ```
+
+Then include in any class:
+
+```ruby
+class Foo
+  include proprocks
+
+  # ...
+end
+```
+
+### prop method
+
+To add a property to the class use the `prop` method
+
+```ruby
+class Foo
+  include proprocks
+
+  prop :bar
+end
+
+a = Foo.new
+
+a.bar # nil
+a.bar = 'abc'
+a.bar # 'abc'
+
+```
+
+To provide a default value for the property, just add it as a second parameter.
+
+```ruby
+class Foo
+  include proprocks
+
+  prop :bar
+  prop :fizz, 'buzz'
+end
+
+a = Foo.new
+
+a.bar # nil
+a.fizz # 'buzz'
+```
+
+### Initialize
+
+PropRocks gives you some new initialization behaviour. You can use either the 
+a hash syntax, DSL-style block syntax, or both!
+
+Note: Defaults are overridden when using these. The precedence is Default > Hash > DSL
+
+```ruby
+# Initialize with hash syntax
+a = Foo.new :bar => 'blah'
+
+a.bar # 'blah'
+a.fizz # 'buzz' ... default wasn't overriden!
+
+# Hash syntax overrides default!
+a = Foo.new :bar => 'blah', :fizz => 'whizz'
+
+a.bar # 'blah'
+a.fizz # 'whizz'
+
+# Initialize with DSL-style block syntax. This overrides defaults too!
+a = Foo.new do
+  bar 'blorg'
+  fizz 'whorg'
+end
+
+a.bar # 'blorg'
+a.fizz # 'whorg'
+
+# Initialize with Hash and DSL-style together. DSL overrides Hash!
+a = Foo.new(:bar => 'blaggle', :fizz => 'waggle') do
+  fizz 'whorggle'
+end
+
+a.bar # 'blaggle'
+a.fizz # 'whorggle' 
+```
