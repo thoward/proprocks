@@ -35,6 +35,8 @@ a = Foo.new do
 end
 ```
 
+The best part is that its only 25 lines of code and this is all it does!
+
 ## Installation
 
 Add this line to your application's Gemfile:
